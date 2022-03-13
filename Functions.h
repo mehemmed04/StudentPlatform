@@ -96,6 +96,63 @@ void SignIn() {
 	}
 }
 
+void AddStudent(Student* student) {
+	Student** newstudents = new Student * [global_student_count + 1]{};
+	for (size_t i = 0; i < global_student_count; i++)
+	{
+		newstudents[i] = students[i];
+	}
+	newstudents[global_student_count] = student;
+	students = newstudents;
+	newstudents = nullptr;
+	global_student_count++;
+}
+
+void SignUp() {
+	char* username = new char[100]{};
+	cout << "Enter username : ";
+	cin.ignore();
+	cin.clear();
+	cin.getline(username, 100);
+
+	char* password = new char[100]{};
+	cout << "Enter password (at least 6 characther) : ";
+
+	cin.getline(password, 100);
+
+	char* name = new char[100]{};
+	cout << "Enter name : ";
+
+	cin.getline(name, 100);
+
+	char* surname = new char[100]{};
+	cout << "Enter surname : ";
+	cin.getline(surname, 100);
+
+	int age = 0;
+	cout << "Enter age : ";
+	cin >> age;
+
+	cout << "Enter register day : ";
+	int day = 0;
+	cin >> day;
+	cout << "Enter register month : ";
+	int month = 0;
+	cin >> month;
+	cout << "Enter register year : ";
+	int year = 0;
+	cin >> year;
+
+	if (IsReady(username, password, age)) {
+		Student* s = new Student{ username,password,name,surname,age,Date{day,month,year } };
+		AddStudent(s);
+		WriteStudentsToFile(students);
+	}
+}
+
+
+
+
 #pragma region ShowFunctions
 void ShowStudent(Student* student) {
 	cout << "Student's username : ";
@@ -116,7 +173,7 @@ void ShowStudent(Student* student) {
 }
 
 void ShowAllStudents() {
-	
+	auto students = LoadData();
 	for (size_t i = 0; i < global_student_count; i++)
 	{
 		ShowStudent(students[i]);
