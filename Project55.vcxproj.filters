@@ -32,5 +32,8 @@
     <ClInclude Include="Entities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FileFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

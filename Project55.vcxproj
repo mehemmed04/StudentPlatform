@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities.h" />
+    <ClInclude Include="FileFunctions.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Start.h" />
