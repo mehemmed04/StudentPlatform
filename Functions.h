@@ -14,6 +14,88 @@ void ShowMenu() {
 }
 
 
+Student** LoadData() {
+	Student** student_s = nullptr;
+	if (isExist("students.bin")) {
+		student_s = ReadFromFile();
+	}
+	else {
+		WriteStudentsToFile(students);
+		student_s = ReadFromFile();
+	}
+	return student_s;
+}
+
+
+bool HasUsarname(char* username) {
+	auto students = LoadData();
+	for (size_t i = 0; i < global_student_count; i++)
+	{
+		if (strcmp(students[i]->username, username) == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool IsReady(char* username, char* password, int age)
+{
+	if (HasUsarname(username)) {
+		cout << "This username already exists" << endl;
+		return false;
+	}
+	int l_password = strlen(password);
+	if (l_password < 6) {
+		cout << "Password must be minimum 6 charachter" << endl;
+		return false;
+	}
+	if (age <= 0) {
+		cout << "Age must be grather than 0" << endl;
+		return false;
+	}
+	return true;
+
+}
+
+bool CheckPassword(char* username, char* pass) {
+	for (size_t i = 0; i < global_student_count; i++)
+	{
+		if (strcmp(students[i]->username, username) == 0) {
+			if (strcmp(students[i]->password, pass) == 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+}
+
+void SignIn() {
+	cin.ignore();
+	cin.clear();
+	cout << "Enter username : ";
+	char* username = new char[100];
+	cin.getline(username, 100);
+
+	if (HasUsarname(username)) {
+		cout << "Enter password : ";
+		char* password = new char[100];
+		cin.getline(password, 100);
+		if (CheckPassword(username, password)) {
+			system("cls");
+			cout << "WELCOME" << endl;
+			system("pause");
+		}
+		else {
+			cout << "Password is not correct.Try again" << endl;
+		}
+	}
+	else {
+		cout << "There is not such username." << endl;
+	}
+}
+
 #pragma region ShowFunctions
 void ShowStudent(Student* student) {
 	cout << "Student's username : ";
