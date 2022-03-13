@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 #include"Entities.h"
-#include"FileHelper.h"
+#include"FileFunctions.h"
 
 Student** students = new Student * [3]{
 	new Student{new char[] {"mehemmed_bayramov"},new char[] {"mehemmed123"},new char[] {"Mehemmed"},new char[] {"Bayramov"},17,Date{13,3,2022}},
